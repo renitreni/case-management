@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\CaseSubType;
+use App\Models\CaseType;
 use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,30 +17,30 @@ return new class extends Migration
         Schema::create('case_items', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Team::class);
-            $table->bigInteger('case_no');
-        //  // Case Detail
-        // 'case_type_id',
-        // 'case_sub_type_id',
-        // 'stage_of_case',
-        // 'priority', // High, Medium, Low
-        // 'act',
-        // 'filling_no',
-        // 'filling_date',
-        // 'registration_no',
-        // 'registration_date',
-        // 'first_hearing_date',
-        // 'cnr_no',
-        // 'description',
-        // // FIR Details
-        // 'police_station',
-        // 'fir_no',
-        // 'fir_date',
-        // // COurt Details
-        // 'court_no',
-        // 'court_type_id',
-        // 'court_id',
-        // 'judge_type_id',
-        // 'judge_name',
+            $table->string('case_no');
+            // Case Detail
+            $table->foreignIdFor(CaseType::class); // 'case_type_id',
+            $table->foreignIdFor(CaseSubType::class); // 'case_sub_type_id',
+            $table->string('stage_of_case'); // 'stage_of_case',
+            $table->string('priority'); // 'priority', // High, Medium, Low
+            $table->string('act');// 'act',
+            $table->string('filling_no');// 'filling_no',
+            $table->date('filling_date');// 'filling_date',
+            $table->string('registration_no');// 'registration_no',
+            $table->date('registration_date');// 'registration_date',
+            $table->dateTime('first_hearing_date');// 'first_hearing_date',
+            $table->string('cnr_no');// 'cnr_no',
+            $table->longText('description');// 'description',
+            // FIR Details
+            $table->string('police_station');// 'police_station',
+            $table->string('fir_no');// 'fir_no',
+            $table->date('fir_date'); // 'fir_date',
+            // COurt Details
+            $table->string('court_no'); // 'court_no',
+            // 'court_type_id',
+            // 'court_id',
+            // 'judge_type_id',
+            // 'judge_name',
             $table->timestamps();
         });
     }

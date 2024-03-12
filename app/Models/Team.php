@@ -16,4 +16,8 @@ class Team extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function caseItems(){
+        return $this->hasMany(CaseItem::class);
+    }
 }

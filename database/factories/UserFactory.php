@@ -24,7 +24,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $safeEmail = fake()->unique()->safeEmail();
-        dump($safeEmail);
+        
         return [
             'name' => fake()->name(),
             'email' => $safeEmail,

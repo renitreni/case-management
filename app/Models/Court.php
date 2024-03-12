@@ -5,19 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CaseType extends Model
+class Court extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'code',
         'name',
         'team_id',
-        'is_active'
+        'court_type_id'
     ];
 
-    public function caseSubType()
+    public function teams()
     {
-        return $this->hasMany(CaseSubType::class);
+        return $this->belongsTo(Team::class);
+    }
+
+    public function courtType()
+    {
+        return $this->belongsTo(CourtType::class);
     }
 }
