@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Enums\CasePriority;
-use App\Enums\StageOfCase;
+use App\Models\CaseStatus;
 use App\Models\CaseType;
+use App\Models\CourtType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,11 @@ class CaseItemFactory extends Factory
     {
         $caseType = CaseType::with('caseSubType')->whereHas('caseSubType')->inRandomOrder()->first();
         $caseSubType = collect($caseType->caseSubType)->first();
+        
+        $courtType = CourtType::with('court')->whereHas('court')->inRandomOrder()->first();
+        $court = collect($courtType->court)->first();
+
+        $caseStatus = CaseStatus::inRandomOrder()->first();
 
         return [
             'team_id' => null,
@@ -28,7 +34,7 @@ class CaseItemFactory extends Factory
             'case_no' => $this->faker->swiftBicNumber(),
             'case_type_id' => $caseType->id,
             'case_sub_type_id' => $caseSubType->id,
-            'stage_of_case' => $this->faker->randomElement(array_map(fn ($x) => $x->value, StageOfCase::cases())),
+            'case_status_id' => $caseStatus->id,
             'priority' => $this->faker->randomElement(array_map(fn ($x) => $x->value, CasePriority::cases())), // High, Medium, Low
             'act' => $this->faker->numberBetween(1000, 5000),
             'filling_no' => $this->faker->numberBetween(1000, 5000),
@@ -44,8 +50,8 @@ class CaseItemFactory extends Factory
             'fir_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             // Court Details
             'court_no' => $this->faker->numberBetween(1000, 5000),
-            // 'court_type_id',
-            // 'court_id',
+            'court_type_id' => $courtType->id,
+            'court_id' => $court->id,
             // 'judge_type_id',
             // 'judge_name',
         ];

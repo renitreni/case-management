@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->nullable();
             $table->string('name');
-            $table->foreignIdFor(CaseType::class);
+            $table->foreignIdFor(CaseType::class)->constrained();
             $table->timestamps();
         });
     }

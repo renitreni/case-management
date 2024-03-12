@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('courts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(CourtType::class);
-            $table->foreignIdFor(Team::class);
+            $table->foreignIdFor(CourtType::class)->constrained();
+            $table->foreignIdFor(Team::class)->constrained();
             $table->timestamps();
         });
     }

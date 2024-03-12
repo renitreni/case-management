@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\CaseStatus;
 use App\Models\CaseSubType;
 use App\Models\CaseType;
+use App\Models\Court;
+use App\Models\CourtType;
 use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,9 +22,9 @@ return new class extends Migration
             $table->foreignIdFor(Team::class);
             $table->string('case_no');
             // Case Detail
-            $table->foreignIdFor(CaseType::class); // 'case_type_id',
-            $table->foreignIdFor(CaseSubType::class); // 'case_sub_type_id',
-            $table->string('stage_of_case'); // 'stage_of_case',
+            $table->foreignIdFor(CaseType::class)->constrained(); // 'case_type_id',
+            $table->foreignIdFor(CaseSubType::class)->constrained(); // 'case_sub_type_id',
+            $table->foreignIdFor(CaseStatus::class)->constrained(); // 'stage_of_case',
             $table->string('priority'); // 'priority', // High, Medium, Low
             $table->string('act');// 'act',
             $table->string('filling_no');// 'filling_no',
@@ -35,12 +38,13 @@ return new class extends Migration
             $table->string('police_station');// 'police_station',
             $table->string('fir_no');// 'fir_no',
             $table->date('fir_date'); // 'fir_date',
-            // COurt Details
+            // Court Details
             $table->string('court_no'); // 'court_no',
-            // 'court_type_id',
-            // 'court_id',
+            $table->foreignIdFor(Court::class)->constrained(); // 'court_id',
+            $table->foreignIdFor(CourtType::class)->constrained();// 'court_type_id',
             // 'judge_type_id',
             // 'judge_name',
+            $table->softDeletes();
             $table->timestamps();
         });
     }

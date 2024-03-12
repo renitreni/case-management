@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\CaseItem;
+use App\Models\CaseStatus;
 use App\Models\CourtType;
 use App\Models\Team;
 use App\Models\User;
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
             SuperAdminSeeder::class,
             CaseTypeSeeder::class,
             CourtSeeder::class,
+            CaseStatusSeeder::class
         ]);
 
         if (app()->environment('local', 'develop')) {

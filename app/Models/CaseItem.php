@@ -14,7 +14,7 @@ class CaseItem extends Model
         'case_no',
         'case_type_id',
         'case_sub_type_id',
-        'stage_of_case',
+        'case_status',
         'priority', // High, Medium, Low
         'act',
         'filling_no',
