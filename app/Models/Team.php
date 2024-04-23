@@ -20,4 +20,8 @@ class Team extends Model
     public function caseItems(){
         return $this->hasMany(CaseItem::class);
     }
+
+    public function clients(){
+        return $this->hasMany(Client::class);
+    }
 }

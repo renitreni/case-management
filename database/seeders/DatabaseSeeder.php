@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\CaseItem;
 use App\Models\CaseStatus;
+use App\Models\Client;
 use App\Models\CourtType;
 use App\Models\Team;
 use App\Models\User;
@@ -19,14 +20,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         if (app()->environment('local', 'develop')) {
-            Team::factory(5)->has(User::factory(10))->create();
+            Team::factory(5)->has(User::factory(10))->has(Client::factory(10))->create();
         }
 
         $this->call([
             SuperAdminSeeder::class,
             CaseTypeSeeder::class,
             CourtSeeder::class,
-            CaseStatusSeeder::class
+            CaseStatusSeeder::class,
         ]);
 
         if (app()->environment('local', 'develop')) {
