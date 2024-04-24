@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         if (app()->environment('local', 'develop')) {
-            Team::factory(5)->has(User::factory(10))->has(Client::factory(10))->create();
+            Team::factory(5)
+                ->has(User::factory(10))
+                ->has(Client::factory(10))->create();
         }
 
         $this->call([
