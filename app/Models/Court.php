@@ -12,7 +12,7 @@ class Court extends Model
     protected $fillable = [
         'name',
         'team_id',
-        'court_type_id'
+        'court_type_id',
     ];
 
     public function teams()

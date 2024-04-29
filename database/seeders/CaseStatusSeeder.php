@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\CaseStatus;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 
 class CaseStatusSeeder extends Seeder
@@ -13,14 +13,17 @@ class CaseStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        CaseStatus::factory()->createMany([
-            ['name' => 'trial'],
-            ['name' => 'arrest'],
-            ['name' => 'appeal'],
-            ['name' => 'pretrial'],
-            ['name' => 'sentencing'],
-            ['name' => 'established of charges'],
-            ['name' => 'arraignment and bond hearing'],
-        ]);
+        foreach (Team::all() as $value) {
+            CaseStatus::factory()->createMany([
+                ['name' => 'trial', 'team_id' => $value->id],
+                ['name' => 'arrest', 'team_id' => $value->id],
+                ['name' => 'appeal', 'team_id' => $value->id],
+                ['name' => 'pretrial', 'team_id' => $value->id],
+                ['name' => 'sentencing', 'team_id' => $value->id],
+                ['name' => 'established of charges', 'team_id' => $value->id],
+                ['name' => 'arraignment and bond hearing', 'team_id' => $value->id],
+            ]);
+
+        }
     }
 }

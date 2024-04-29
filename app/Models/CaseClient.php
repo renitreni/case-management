@@ -10,8 +10,19 @@ class CaseClient extends Model
     use HasFactory;
 
     protected $fillable = [
+        'client_id',
         'client_type',
         'respondent_name',
-        'respondent_advocate'
+        'respondent_advocate',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function caseItem()
+    {
+        return $this->belongsTo(CaseItem::class);
+    }
 }

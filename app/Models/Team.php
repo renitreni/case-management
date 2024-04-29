@@ -10,18 +10,21 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 
-    public function caseItems(){
+    public function caseItems()
+    {
         return $this->hasMany(CaseItem::class);
     }
 
-    public function clients(){
+    public function clients()
+    {
         return $this->hasMany(Client::class);
     }
 }

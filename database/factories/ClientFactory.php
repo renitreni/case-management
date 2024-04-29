@@ -26,8 +26,8 @@ class ClientFactory extends Factory
             'phone_no_other' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
             'city' => $this->faker->city(),
-            'state'  => $this->faker->streetAddress(),
-            'country' => $this->faker->country()
+            'state' => $this->faker->streetAddress(),
+            'country' => $this->faker->country(),
         ];
     }
 }

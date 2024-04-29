@@ -3,10 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClientResource\Pages;
-use App\Filament\Resources\ClientResource\RelationManagers;
 use App\Models\Client;
-use Filament\Actions\ViewAction;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -14,14 +11,11 @@ use Filament\Forms\Form;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\Tabs\Tab;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\View;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClientResource extends Resource
 {
@@ -41,7 +35,7 @@ class ClientResource extends Resource
                     ->columnSpan(4)
                     ->options([
                         'male' => 'Male',
-                        'female' => 'Female'
+                        'female' => 'Female',
                     ]),
                 TextInput::make('email')->columnSpan(5),
                 TextInput::make('phone_no')->columnSpan(4),

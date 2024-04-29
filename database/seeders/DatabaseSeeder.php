@@ -4,10 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CaseItem;
-use App\Models\CaseStatus;
 use App\Models\Client;
-use App\Models\CourtType;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CaseTypeSeeder::class,
             CourtSeeder::class,
             CaseStatusSeeder::class,
+            JudgeTypeSeeder::class,
         ]);
 
         if (app()->environment('local', 'develop')) {

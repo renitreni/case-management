@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CaseItem extends Model
 {
@@ -14,7 +16,6 @@ class CaseItem extends Model
         'case_no',
         'case_type_id',
         'case_sub_type_id',
-        'case_status',
         'priority', // High, Medium, Low
         'act',
         'filling_no',
@@ -35,4 +36,29 @@ class CaseItem extends Model
         'judge_type_id',
         'judge_name',
     ];
+
+    public function caseClients(): hasMany
+    {
+        return $this->hasMany(CaseClient::class);
+    }
+
+    public function court(): BelongsTo
+    {
+        return $this->belongsTo(Court::class);
+    }
+
+    public function caseType(): BelongsTo
+    {
+        return $this->belongsTo(CaseType::class);
+    }
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    public function caseStatus(): BelongsTo
+    {
+        return $this->belongsTo(CaseStatus::class);
+    }
 }

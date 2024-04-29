@@ -22,7 +22,7 @@ class CaseItemFactory extends Factory
     {
         $caseType = CaseType::with('caseSubType')->whereHas('caseSubType')->inRandomOrder()->first();
         $caseSubType = collect($caseType->caseSubType)->first();
-        
+
         $courtType = CourtType::with('court')->whereHas('court')->inRandomOrder()->first();
         $court = collect($courtType->court)->first();
 

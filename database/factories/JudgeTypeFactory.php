@@ -17,7 +17,8 @@ class JudgeTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => null,
+            'team_id' => null,
         ];
     }
 }

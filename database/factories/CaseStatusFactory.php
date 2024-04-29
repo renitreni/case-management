@@ -17,7 +17,7 @@ class CaseStatusFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => null
+            'name' => null,
         ];
     }
 }
