@@ -28,7 +28,7 @@ class Client extends Model
 
     public function fullname(): Attribute
     {
-        return Attribute::make(get: fn ($v, $row) => $row['first_name'] . ' ' . $row['last_name']);
+        return Attribute::make(get: fn ($v, $row) => $row['first_name'].' '.$row['last_name']);
     }
 
     public function team(): BelongsTo

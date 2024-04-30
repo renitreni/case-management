@@ -37,8 +37,13 @@ class CaseItem extends Model
         'court_id',
         'judge_type_id',
         'judge_name',
-        'remarks'
+        'remarks',
     ];
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     public function caseClients(): hasMany
     {
@@ -53,11 +58,6 @@ class CaseItem extends Model
     public function caseType(): BelongsTo
     {
         return $this->belongsTo(CaseType::class);
-    }
-
-    public function team(): BelongsTo
-    {
-        return $this->belongsTo(Team::class);
     }
 
     public function caseStatus(): BelongsTo

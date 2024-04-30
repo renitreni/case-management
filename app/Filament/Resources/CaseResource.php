@@ -10,9 +10,7 @@ use App\Models\CaseSubType;
 use App\Models\CaseType;
 use App\Models\CourtType;
 use App\Models\JudgeType;
-use DateTime;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -20,9 +18,7 @@ use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -42,7 +38,7 @@ class CaseResource extends Resource
                         ->options([
                             'high' => 'High',
                             'medium' => 'Medium',
-                            'low' => 'Low'
+                            'low' => 'Low',
                         ])
                         ->label('Case Priority')
                         ->inlineLabel(false)
@@ -51,7 +47,7 @@ class CaseResource extends Resource
                 Tabs::make('Tabs')
                     ->columnSpanFull()
                     ->columns([
-                        'md' => 3
+                        'md' => 3,
                     ])
                     ->tabs([
                         Tabs\Tab::make('Case Detail')
@@ -77,13 +73,13 @@ class CaseResource extends Resource
                                     ->label('Stage Of Case')
                                     ->options(CaseStatus::filterByTenant()->pluck('name', 'id')),
                                 TextInput::make('act')->columnSpan(['md' => 1])->required(),
+                                TextInput::make('cnr_no')->label('CNR No.')->columnSpan(['md' => 1])->required(),
                                 DatePicker::make('filing_date')->columnStart(['md' => 1])->required(),
                                 TextInput::make('filing_no')->columnSpan(['md' => 1])->required(),
+                                DatePicker::make('first_hearing_date')->label('First Hearing Date')->columnSpan(['md' => 1])->required(),
                                 DatePicker::make('registration_date')->label('Registration Date')->columnStart(['md' => 1])->required(),
                                 TextInput::make('registration_no')->label('Registration No.')->columnSpan(['md' => 1])->required(),
-                                DatePicker::make('first_hearing_date')->label('First Hearing Date')->columnStart(['md' => 1])->required(),
-                                TextInput::make('cnr_no')->label('CNR No.')->columnSpan(['md' => 1])->required(),
-                                Textarea::make('description')->columnSpanFull()
+                                Textarea::make('description')->columnSpanFull(),
                             ]),
                         Tabs\Tab::make('First Information Report Detail')
                             ->schema([
@@ -105,9 +101,9 @@ class CaseResource extends Resource
                                     ->label('Court Type')
                                     ->reactive()
                                     ->options(CourtType::filterByTenant()->pluck('name', 'id')),
-                                Textarea::make('remarks')->columnSpanFull()
+                                Textarea::make('remarks')->columnSpanFull(),
                             ]),
-                    ])
+                    ]),
             ]);
     }
 

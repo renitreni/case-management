@@ -44,8 +44,8 @@ return new class extends Migration
             $table->foreignIdFor(Court::class)->constrained(); // 'court_id',
             $table->foreignIdFor(CourtType::class)->constrained(); // 'court_type_id',
             $table->foreignIdFor(JudgeType::class)->constrained(); // 'judge_type_id',
-            $table->string('judge_name')->nullable();// 'judge_name',
-            $table->text('remarks')->nullable();// 'judge_name',
+            $table->string('judge_name')->nullable(); // 'judge_name',
+            $table->text('remarks')->nullable(); // 'judge_name',
             $table->softDeletes();
             $table->timestamps();
         });

@@ -4,25 +4,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CaseSubTypeResource\RelationManagers\CaseSubTypeRelationManager;
 use App\Filament\Resources\CaseTypeResource\Pages;
-use App\Filament\Resources\CaseTypeResource\RelationManagers;
-use App\Models\CaseSubType;
 use App\Models\CaseType;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CaseTypeResource extends Resource
 {
     protected static ?string $model = CaseType::class;
 
     protected static ?string $navigationGroup = 'Variables';
-
 
     public static function form(Form $form): Form
     {
@@ -36,7 +30,7 @@ class CaseTypeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->sortable()
+                TextColumn::make('name')->sortable(),
             ])
             ->filters([
                 //
@@ -54,7 +48,7 @@ class CaseTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CaseSubTypeRelationManager::class
+            CaseSubTypeRelationManager::class,
         ];
     }
 

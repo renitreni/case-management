@@ -56,7 +56,7 @@ class CaseItemFactory extends Factory
             'court_id' => $court->id,
             'judge_type_id' => $judgeType->id, // 'judge_type_id',
             'judge_name' => $this->faker->name(), // 'judge_name',
-            'remarks' => $this->faker->paragraph()
+            'remarks' => $this->faker->paragraph(),
         ];
     }
 }

@@ -9,8 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
 
 class ClientsRelationManager extends RelationManager
@@ -42,7 +40,7 @@ class ClientsRelationManager extends RelationManager
                 Forms\Components\Select::make('client_type')
                     ->options([
                         'petitioner' => 'Petitioner',
-                        'respondent' => 'Respondent'
+                        'respondent' => 'Respondent',
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('respondent_name')
