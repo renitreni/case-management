@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,10 +17,11 @@ class CaseItem extends Model
         'case_no',
         'case_type_id',
         'case_sub_type_id',
+        'case_status_id',
         'priority', // High, Medium, Low
         'act',
-        'filling_no',
-        'filling_date',
+        'filing_no',
+        'filing_date',
         'registration_no',
         'registration_date',
         'first_hearing_date',
@@ -35,6 +37,7 @@ class CaseItem extends Model
         'court_id',
         'judge_type_id',
         'judge_name',
+        'remarks'
     ];
 
     public function caseClients(): hasMany
@@ -60,5 +63,10 @@ class CaseItem extends Model
     public function caseStatus(): BelongsTo
     {
         return $this->belongsTo(CaseStatus::class);
+    }
+
+    public function scopeFilterByTenant()
+    {
+        return $this->where('team_id', Filament::getTenant()->id);
     }
 }

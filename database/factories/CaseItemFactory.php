@@ -6,6 +6,7 @@ use App\Enums\CasePriority;
 use App\Models\CaseStatus;
 use App\Models\CaseType;
 use App\Models\CourtType;
+use App\Models\JudgeType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,6 +28,7 @@ class CaseItemFactory extends Factory
         $court = collect($courtType->court)->first();
 
         $caseStatus = CaseStatus::inRandomOrder()->first();
+        $judgeType = JudgeType::inRandomOrder()->first();
 
         return [
             'team_id' => null,
@@ -37,8 +39,8 @@ class CaseItemFactory extends Factory
             'case_status_id' => $caseStatus->id,
             'priority' => $this->faker->randomElement(array_map(fn ($x) => $x->value, CasePriority::cases())), // High, Medium, Low
             'act' => $this->faker->numberBetween(1000, 5000),
-            'filling_no' => $this->faker->numberBetween(1000, 5000),
-            'filling_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'filing_no' => $this->faker->numberBetween(1000, 5000),
+            'filing_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'registration_no' => $this->faker->numberBetween(1000, 5000),
             'registration_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'first_hearing_date' => $this->faker->dateTimeBetween('-1 month', '3 months'),
@@ -52,8 +54,9 @@ class CaseItemFactory extends Factory
             'court_no' => $this->faker->numberBetween(1000, 5000),
             'court_type_id' => $courtType->id,
             'court_id' => $court->id,
-            // 'judge_type_id',
-            // 'judge_name',
+            'judge_type_id' => $judgeType->id, // 'judge_type_id',
+            'judge_name' => $this->faker->name(), // 'judge_name',
+            'remarks' => $this->faker->paragraph()
         ];
     }
 }

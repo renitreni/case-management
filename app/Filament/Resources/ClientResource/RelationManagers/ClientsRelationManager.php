@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ClientReourceResource\RelationManagers;
+namespace App\Filament\Resources\ClientResource\RelationManagers;
 
 use App\Models\Client;
 use Filament\Forms;
@@ -22,14 +22,17 @@ class ClientsRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('client_id')
+                    ->label('Client')
+                    ->required()
                     ->searchable()
                     ->getSearchResultsUsing(
                         function (string $search) {
                             return Client::where(
-                                DB::raw('CONCAT(first_name, \' \', last_name)'),
+                                DB::raw('CONCAT(first_name, \' \', last_name) as full'),
                                 'like',
                                 "{$search}%"
                             )
+                                ->filterByTenant()
                                 ->limit(50)
                                 ->pluck(DB::raw('CONCAT(first_name, \' \', last_name)'), 'id')
                                 ->toArray();
@@ -38,8 +41,8 @@ class ClientsRelationManager extends RelationManager
                     ->getOptionLabelUsing(fn ($value): ?string => Client::find($value)?->fullname),
                 Forms\Components\Select::make('client_type')
                     ->options([
-                        'petitioner',
-                        'respondent'
+                        'petitioner' => 'Petitioner',
+                        'respondent' => 'Respondent'
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('respondent_name')
@@ -57,6 +60,9 @@ class ClientsRelationManager extends RelationManager
             ->recordTitleAttribute('id')
             ->columns([
                 Tables\Columns\TextColumn::make('client.fullname')->sortable(),
+                Tables\Columns\TextColumn::make('client_type')->badge()->sortable(),
+                Tables\Columns\TextColumn::make('respondent_name')->sortable(),
+                Tables\Columns\TextColumn::make('respondent_advocate')->sortable(),
             ])
             ->filters([
                 //

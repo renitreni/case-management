@@ -4,16 +4,16 @@ namespace App\Filament\Resources\CaseTypeResource\Pages;
 
 use App\Filament\Resources\CaseTypeResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\EditRecord;
 
-class ManageCaseTypes extends ManageRecords
+class EditCaseType extends EditRecord
 {
     protected static string $resource = CaseTypeResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 }

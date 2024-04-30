@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,5 +24,10 @@ class Court extends Model
     public function courtType()
     {
         return $this->belongsTo(CourtType::class);
+    }
+
+    public function scopeFilterByTenant()
+    {
+        return $this->where('team_id', Filament::getTenant()->id);
     }
 }

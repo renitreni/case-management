@@ -7,27 +7,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CourtType extends Model
+class Task extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'team_id',
+        'task_name',
+        'case_item_id',
+        'start_date',
+        'end_date',
+        'status', // completed, not started, in progress
+        'priority', // High, Medium, Low
     ];
 
-    public function court()
+    public function scopeFilterByTenant()
     {
-        return $this->hasMany(Court::class);
+        return $this->where('team_id', Filament::getTenant()->id);
     }
 
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
-    }
-
-    public function scopeFilterByTenant()
-    {
-        return $this->where('team_id', Filament::getTenant()->id);
     }
 }

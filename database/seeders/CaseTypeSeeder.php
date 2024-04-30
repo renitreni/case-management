@@ -16,54 +16,53 @@ class CaseTypeSeeder extends Seeder
     {
         $teams = Team::all();
         foreach ($teams as $team) {
-            CaseType::factory()->createMany([
+            $caseTypeCriminal = CaseType::factory()->create([
+                'name' => 'Criminal',
+                'team_id' => $team->id,
+            ]);
+
+            CaseSubType::factory()->createMany([
                 [
-                    'name' => 'Criminal',
-                    'team_id' => $team->id,
+                    'code' => 'CR RA',
+                    'name' => 'Criminal Revision Application',
+                    'case_type_id' => $caseTypeCriminal->id,
                 ],
+                [
+                    'code' => 'CRREF',
+                    'name' => 'Criminal Reference',
+                    'case_type_id' => $caseTypeCriminal->id,
+                ],
+                [
+                    'code' => 'SCR A',
+                    'name' => 'Special Criminal Application',
+                    'case_type_id' => $caseTypeCriminal->id,
+                ],
+            ]);
+
+            $caseTypeCivil = CaseType::factory()->create(
                 [
                     'name' => 'Civil',
                     'team_id' => $team->id,
                 ],
+            );
+
+            CaseSubType::factory()->createMany([
+                [
+                    'code' => 'LPA',
+                    'name' => 'Letters Patent Appeal',
+                    'case_type_id' => $caseTypeCivil->id,
+                ],
+                [
+                    'code' => 'MCA',
+                    'name' => 'Misc. Civil Application',
+                    'case_type_id' => $caseTypeCivil->id,
+                ],
+                [
+                    'code' => 'AO',
+                    'name' => 'Appeal From Order',
+                    'case_type_id' => $caseTypeCivil->id,
+                ],
             ]);
         }
-
-        $criminalCase = CaseType::where('name', 'Criminal')->first();
-        CaseSubType::factory()->createMany([
-            [
-                'code' => 'CR RA',
-                'name' => 'Criminal Revision Application',
-                'case_type_id' => $criminalCase->id,
-            ],
-            [
-                'code' => 'CRREF',
-                'name' => 'Criminal Reference',
-                'case_type_id' => $criminalCase->id,
-            ],
-            [
-                'code' => 'SCR A',
-                'name' => 'Special Criminal Application',
-                'case_type_id' => $criminalCase->id,
-            ],
-        ]);
-
-        $civilCase = CaseType::where('name', 'Civil')->first();
-        CaseSubType::factory()->createMany([
-            [
-                'code' => 'LPA',
-                'name' => 'Letters Patent Appeal',
-                'case_type_id' => $civilCase->id,
-            ],
-            [
-                'code' => 'MCA',
-                'name' => 'Misc. Civil Application',
-                'case_type_id' => $civilCase->id,
-            ],
-            [
-                'code' => 'AO',
-                'name' => 'Appeal From Order',
-                'case_type_id' => $civilCase->id,
-            ],
-        ]);
     }
 }

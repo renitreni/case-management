@@ -5,6 +5,7 @@ use App\Models\CaseSubType;
 use App\Models\CaseType;
 use App\Models\Court;
 use App\Models\CourtType;
+use App\Models\JudgeType;
 use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -27,8 +28,8 @@ return new class extends Migration
             $table->foreignIdFor(CaseStatus::class)->constrained(); // 'stage_of_case',
             $table->string('priority'); // 'priority', // High, Medium, Low
             $table->string('act'); // 'act',
-            $table->string('filling_no'); // 'filling_no',
-            $table->date('filling_date'); // 'filling_date',
+            $table->string('filing_no'); // 'filling_no',
+            $table->date('filing_date'); // 'filling_date',
             $table->string('registration_no'); // 'registration_no',
             $table->date('registration_date'); // 'registration_date',
             $table->dateTime('first_hearing_date'); // 'first_hearing_date',
@@ -42,8 +43,9 @@ return new class extends Migration
             $table->string('court_no'); // 'court_no',
             $table->foreignIdFor(Court::class)->constrained(); // 'court_id',
             $table->foreignIdFor(CourtType::class)->constrained(); // 'court_type_id',
-            // 'judge_type_id',
-            // 'judge_name',
+            $table->foreignIdFor(JudgeType::class)->constrained(); // 'judge_type_id',
+            $table->string('judge_name')->nullable();// 'judge_name',
+            $table->text('remarks')->nullable();// 'judge_name',
             $table->softDeletes();
             $table->timestamps();
         });

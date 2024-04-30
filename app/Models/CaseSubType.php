@@ -17,6 +17,6 @@ class CaseSubType extends Model
 
     public function caseType()
     {
-        return $this->belongsToMany(CaseType::class);
+        return $this->belongsTo(CaseType::class);
     }
 }

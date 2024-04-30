@@ -2,26 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CaseStatusResource\Pages;
-use App\Models\CaseStatus;
-use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\TaskResource\Pages;
+use App\Filament\Resources\TaskResource\RelationManagers;
+use App\Models\Task;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CaseStatusResource extends Resource
+class TaskResource extends Resource
 {
-    protected static ?string $model = CaseStatus::class;
+    protected static ?string $model = Task::class;
 
-    protected static ?string $navigationGroup = 'Variables';
+    protected static ?string $navigationIcon = 'heroicon-o-trophy';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name'),
+                //
             ]);
     }
 
@@ -29,14 +31,13 @@ class CaseStatusResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->sortable(),
+                //
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -45,10 +46,19 @@ class CaseStatusResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageCaseStatuses::route('/'),
+            'index' => Pages\ListTasks::route('/'),
+            'create' => Pages\CreateTask::route('/create'),
+            'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
     }
 }
