@@ -6,6 +6,7 @@ use App\Filament\Resources\TaskResource\Pages;
 use App\Models\CaseItem;
 use App\Models\Task;
 use App\Models\User;
+use App\Tables\Columns\MembersColumn;
 use Carbon\Carbon;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
@@ -87,7 +88,7 @@ class TaskResource extends Resource
                                 return null;
                             }),
                         Select::make('members')
-                            ->relationship('members', 'first_name')
+                            ->relationship('members', 'name')
                             ->required()
                             ->columnSpan(['md' => 8])
                             ->label('Members')
@@ -125,6 +126,7 @@ class TaskResource extends Resource
                         'not started' => 'gray',
                     })
                     ->sortable(),
+                MembersColumn::make('members')
             ])
             ->filters([
                 //
